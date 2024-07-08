@@ -29,6 +29,6 @@ Before running the application, make sure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Ganeshshinde-2003/Pesto-ToDo
    cd <project_directory>
    ```
