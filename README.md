@@ -32,3 +32,19 @@ Before running the application, make sure you have the following installed:
    git clone https://github.com/Ganeshshinde-2003/Pesto-ToDo
    cd Pesto-ToDo
    ```
+2. **Install dependencies:**
+
+   # Install frontend dependencies
+      ```bash
+      npm install
+      ```
+
+   # Navigate to backend directory
+      ```bash
+      cd backend
+      ```
+
+   # Install backend dependencies
+      ```bash
+      npm install
+      ```
