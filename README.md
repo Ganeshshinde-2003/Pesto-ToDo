@@ -30,5 +30,5 @@ Before running the application, make sure you have the following installed:
 
    ```bash
    git clone https://github.com/Ganeshshinde-2003/Pesto-ToDo
-   cd <project_directory>
+   cd Pesto-ToDo
    ```
