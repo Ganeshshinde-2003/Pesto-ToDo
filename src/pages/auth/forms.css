@@ -36,7 +36,9 @@
   font-size: 1rem;
 }
 
-.input-wrapper input, .input-wrapper textarea, select {
+.input-wrapper input,
+.input-wrapper textarea,
+select {
   width: 100%;
   border: 1px solid #4c4c4c;
   outline: none;
@@ -48,12 +50,15 @@
   color: white;
 }
 
-.input-wrapper input:focus, .input-wrapper textarea:focus, select {
+.input-wrapper input:focus,
+.input-wrapper textarea:focus,
+select {
   border: 1px solid rgb(150, 104, 194);
   color: white;
 }
 
-.form-wrapper button, button {
+.form-wrapper button,
+button {
   border-radius: 0.5rem;
   padding: 15px;
   border: none;
@@ -67,10 +72,10 @@
     linear-gradient(rgb(248, 250, 252), rgb(181, 181, 206), rgb(206, 161, 226))
       border-box border-box;
 
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .button-disabled {
@@ -114,4 +119,18 @@
   text-align: center;
   color: white;
   font-weight: 700;
+}
+@media (max-width: 600px) {
+  .form-wrapper {
+    width: auto;
+  }
+  .form-wrapper form {
+    gap: 0px;
+  }
+  .form-wrapper h2 {
+    font-size: 1.5rem;
+  }
+  .edit-popup .form-wrapper {
+    width: 80vw;
+  }
 }

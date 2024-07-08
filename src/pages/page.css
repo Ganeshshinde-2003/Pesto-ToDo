@@ -20,11 +20,10 @@
   gap: 20px;
 }
 
-.todo-list .home-header{
+.todo-list .home-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
 }
 
 .home-header h2 {
@@ -37,16 +36,16 @@
   position: relative;
 }
 
-.home-header .user-info{
+.home-header .user-info {
   background: linear-gradient(
-    to right,
-    rgb(152, 110, 235),
-    rgb(253, 104, 179),
-    rgb(253, 183, 134)
-  )
-  padding-box padding-box,
-linear-gradient(rgb(248, 250, 252), rgb(181, 181, 206), rgb(206, 161, 226))
-  border-box border-box;
+        to right,
+        rgb(152, 110, 235),
+        rgb(253, 104, 179),
+        rgb(253, 183, 134)
+      )
+      padding-box padding-box,
+    linear-gradient(rgb(248, 250, 252), rgb(181, 181, 206), rgb(206, 161, 226))
+      border-box border-box;
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -72,23 +71,23 @@ linear-gradient(rgb(248, 250, 252), rgb(181, 181, 206), rgb(206, 161, 226))
   gap: 5px;
 }
 
-.todo-form{
+.todo-form {
   display: flex;
   flex-direction: column;
 }
 
-.user-details button{
+.user-details button {
   margin-top: 10px;
 }
 
-.todo-list .content{
+.todo-list .content {
   display: flex;
   flex-grow: 1;
   gap: 80px;
 }
 .todo-list .todo-items {
   width: 60%;
-  height: 500px;
+  height: 65vh;
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -102,21 +101,72 @@ linear-gradient(rgb(248, 250, 252), rgb(181, 181, 206), rgb(206, 161, 226))
   gap: 10px;
   align-items: center;
 }
-.filter label, .search .input-wrapper label{
+.filter label,
+.search .input-wrapper label {
   flex-shrink: 0;
   font-size: 18px;
   color: rgb(255 255 255 / 80%);
 }
-.functionality-div{
+.functionality-div {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 100px;
 }
-.functionality-div .search .input-wrapper{
+.functionality-div .search .input-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .container-wrapper {
+    padding: 20px 15px;
+  }
+  .filter label,
+  .search .input-wrapper label {
+    font-size: 15px;
+  }
+  .input-wrapper input,
+  .input-wrapper textarea,
+  select {
+    font-size: 0.9rem;
+    padding: 7px;
+  }
+  .functionality-div {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .functionality-div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .container-wrapper {
+    margin: 0;
+    border-radius: 0;
+    height: auto;
+    width: 100vw;
+    padding: 20px;
+  }
+  .home-header h2 {
+    font-size: 2rem;
+  }
+  .home-header .user-info {
+    height: 40px;
+    width: 40px;
+    font-size: 2rem;
+  }
+  .user-details {
+    width: 80vw;
+  }
 }

@@ -69,6 +69,7 @@ const TodoItem = ({ todo, refreshTodoList }) => {
     <div className="todo-item">
       <div className="todo-head">
         <h3 className="todo-title">{todo.title}</h3>
+        <div className="todo-edit-wrapper">
         <div className="todo-edit-section">
           <p className="todo-deadline">
             Deadline: {new Date(todo.deadline).toLocaleDateString()}
@@ -86,6 +87,7 @@ const TodoItem = ({ todo, refreshTodoList }) => {
           <div className="delete-icon" onClick={handleDelete}>
             <MdDeleteOutline />
           </div>
+        </div>
         </div>
       </div>
       <p className="todo-description">{todo.description}</p>
