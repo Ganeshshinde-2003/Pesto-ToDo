@@ -1,0 +1,95 @@
+.todo-item {
+  background-color: #1f1f1f;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.todo-head{
+  display: flex;
+  align-items: center;
+}
+
+.todo-title {
+  font-size: 1.5em;
+  flex: 1;
+}
+.todo-edit-section{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-content: flex-end;
+  justify-content: left;
+}
+
+.todo-description {
+  font-size: 1em;
+  color: rgb(255 255 255 / 80%);
+}
+
+.todo-deadline,
+.todo-status {
+  font-size: 0.9em;
+  color: rgb(255 255 255 / 80%);
+}
+
+.todo-status.to-do {
+  color: #f39d12f3; 
+}
+
+.todo-status.in-progress {
+  color: #007bff; 
+}
+
+.todo-status.done {
+  color: #28a745; 
+}
+.todo-icons{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-icon, .delete-icon{
+  color: rgb(255 255 255 / 80%);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+.edit-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1f1f1f;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 20px;
+}
+
+.edit-form-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.edit-form-buttons button{
+  cursor: pointer;
+}
+
+.todo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
