@@ -76,5 +76,5 @@ Open a new terminal window/tab, navigate to the project directory, and run:
 
 ### Additional Notes
 
-- This project was created as part of a Full-Stack Developer Challenge.
+- This project was created as part of a Front-end Developer Challenge.
 - For any issues or questions, please contact [Your Name](mailto:sindheganesh2004@gmail.com).
