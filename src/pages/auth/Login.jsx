@@ -9,13 +9,14 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [isFormValid, setIsFormValid] = useState(false);
+
+  const isFormValid = email && password;
 
   useEffect(() => {
-    setIsFormValid(email && password);
+    setEmail(email.trim());
+    setPassword(password.trim());
   }, [email, password]);
 
   const handleLogin = async (e) => {
@@ -24,11 +25,16 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Logged in successfully!", {position: "bottom-center", duration: 2000});
+      toast.success("Logged in successfully!", {
+        position: "bottom-center",
+        duration: 2000,
+      });
       navigate("/");
     } catch (error) {
-      setError(error.message);
-      toast.error("Login error: " + error.message, {position: "bottom-center", duration: 2000});
+      toast.error(`Login error: ${error.message}`, {
+        position: "bottom-center",
+        duration: 2000,
+      });
       console.error(error);
     } finally {
       setLoading(false);

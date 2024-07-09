@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./forms.css";
@@ -12,14 +11,10 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(() => {
-    setIsFormValid(firstName && email && password);
-  }, [firstName, email, password]);
+  const isFormValid = firstName && email && password;
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,11 +29,16 @@ const Register = () => {
         firebaseId: user.uid,
         name: firstName,
       });
-      toast.success("Accound created in successfully!", {position: "bottom-center", duration: 2000});
+      toast.success("Account created successfully!", {
+        position: "bottom-center",
+        duration: 2000,
+      });
       navigate("/login");
     } catch (error) {
-      setError(error.message);
-      toast.error("Registration error: " + error.message, {position: "bottom-center", duration: 2000} )
+      toast.error(`Registration error: ${error.message}`, {
+        position: "bottom-center",
+        duration: 2000,
+      });
       console.error("Registration error:", error);
     } finally {
       setLoading(false);
@@ -48,7 +48,7 @@ const Register = () => {
   return (
     <div className="form-wrapper">
       <h2>Create an account</h2>
-      <p>Please enter your details here.</p>
+      <p>Please enter your details below.</p>
       <form onSubmit={handleRegister}>
         <InputField
           label="Name:"

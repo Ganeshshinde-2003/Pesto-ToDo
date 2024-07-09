@@ -21,7 +21,7 @@ const TodoItem = ({ todo, refreshTodoList }) => {
       setEditedTodo({
         title: todo.title,
         description: todo.description,
-        deadline: todo.deadline,
+        deadline: formatDate(todo.deadline),
         status: todo.status,
       });
     }
@@ -38,10 +38,17 @@ const TodoItem = ({ todo, refreshTodoList }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(`/api/todos/${todo._id}`);
-      toast.success("Todo deleted successfully!", { position: "bottom-center", duration: 2000 })
+      toast.success("Todo deleted successfully!", {
+        position: "bottom-center",
+        duration: 2000,
+      });
       refreshTodoList(true);
     } catch (error) {
-      toast.error("Failed to delete ToDO!", { position: "bottom-center", duration: 2000 })
+      toast.error(`Failed to delete todo: ${error.message}`, {
+        position: "bottom-center",
+        duration: 2000,
+      });
+      console.error("Deletion error:", error);
     }
   };
 
@@ -57,12 +64,28 @@ const TodoItem = ({ todo, refreshTodoList }) => {
     e.preventDefault();
     try {
       await axios.put(`/api/todos/${todo._id}`, editedTodo);
-      toast.success("Todo updated successfully!", { position: "bottom-center", duration: 2000 })
+      toast.success("Todo updated successfully!", {
+        position: "bottom-center",
+        duration: 2000,
+      });
       setEditing(false);
       refreshTodoList(true);
     } catch (error) {
-      toast.error("Failed to update ToDO!", { position: "bottom-center", duration: 2000 })
+      toast.error(`Failed to update todo: ${error.message}`, {
+        position: "bottom-center",
+        duration: 2000,
+      });
+      console.error("Update error:", error);
     }
+  };
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   return (
@@ -70,24 +93,22 @@ const TodoItem = ({ todo, refreshTodoList }) => {
       <div className="todo-head">
         <h3 className="todo-title">{todo.title}</h3>
         <div className="todo-edit-wrapper">
-        <div className="todo-edit-section">
-          <p className="todo-deadline">
-            Deadline: {new Date(todo.deadline).toLocaleDateString()}
-          </p>
-          <p
-            className={`todo-status ${todo.status.toLowerCase().replace(" ", "-")}`}
-          >
-            Status: {todo.status}
-          </p>
-        </div>
-        <div className="todo-icons">
-          <div className="edit-icon" onClick={handleEdit}>
-            <FiEdit2 />
+          <div className="todo-edit-section">
+            <p className="todo-deadline">
+              Deadline: {new Date(todo.deadline).toLocaleDateString()}
+            </p>
+            <p className={`todo-status ${todo.status.toLowerCase().replace(" ", "-")}`}>
+              Status: {todo.status}
+            </p>
           </div>
-          <div className="delete-icon" onClick={handleDelete}>
-            <MdDeleteOutline />
+          <div className="todo-icons">
+            <div className="edit-icon" onClick={handleEdit}>
+              <FiEdit2 />
+            </div>
+            <div className="delete-icon" onClick={handleDelete}>
+              <MdDeleteOutline />
+            </div>
           </div>
-        </div>
         </div>
       </div>
       <p className="todo-description">{todo.description}</p>
@@ -118,7 +139,7 @@ const TodoItem = ({ todo, refreshTodoList }) => {
               <InputField
                 label="Deadline:"
                 type="date"
-                value={editedTodo.deadline || todo.deadline}
+                value={editedTodo.deadline}
                 onChange={handleInputChange}
                 required
                 name="deadline"

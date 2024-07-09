@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./page.css";
-import "./auth/forms.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../components/firebase";
 import TodoItem from "../components/reusable_components/Todo_Item";
 import InputField from "../components/reusable_components/input_field";
 import toast from "react-hot-toast";
+import "./page.css";
+import "./auth/forms.css";
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -15,7 +15,6 @@ const Home = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showUserInfo, setShowUserInfo] = useState(false);
-  const navigate = useNavigate();
   const [newTodo, setNewTodo] = useState({
     title: "",
     description: "",
@@ -25,13 +24,14 @@ const Home = () => {
   const [formError, setFormError] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user = auth.currentUser;
-        if (user) {
-          const response = await axios.get(`/api/users/${user.uid}`);
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          const response = await axios.get(`/api/users/${currentUser.uid}`);
           setUser(response.data);
         } else {
           setError("No user is signed in.");
@@ -47,9 +47,9 @@ const Home = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const user = auth.currentUser;
-        if (user) {
-          const response = await axios.get(`/api/todos/${user.uid}`);
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          const response = await axios.get(`/api/todos/${currentUser.uid}`);
           setTodos(response.data);
         } else {
           setError("No user is signed in.");
@@ -66,9 +66,9 @@ const Home = () => {
 
   const refreshTodoList = async () => {
     try {
-      const user = auth.currentUser;
-      if (user) {
-        const response = await axios.get(`/api/todos/${user.uid}`);
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const response = await axios.get(`/api/todos/${currentUser.uid}`);
         setTodos(response.data);
       } else {
         setError("No user is signed in.");
@@ -78,9 +78,7 @@ const Home = () => {
     }
   };
 
-  const handleUserInfoClick = () => {
-    setShowUserInfo((prevShowUserInfo) => !prevShowUserInfo);
-  };
+  const handleUserInfoClick = () => setShowUserInfo(!showUserInfo);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -100,18 +98,16 @@ const Home = () => {
 
   const handleCreateTodo = async (e) => {
     e.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setSubmitLoading(true);
 
     try {
-      const user = auth.currentUser;
-      if (user) {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
         await axios.post(`/api/todos`, {
           ...newTodo,
-          firebaseId: user.uid,
+          firebaseId: currentUser.uid,
         });
         toast.success("ToDo created successfully", {
           position: "bottom-center",
@@ -157,14 +153,12 @@ const Home = () => {
   const filterTodos = () => {
     let filteredTodos = todos;
 
-    // Apply status filter
     if (statusFilter !== "All") {
       filteredTodos = filteredTodos.filter(
         (todo) => todo.status === statusFilter
       );
     }
 
-    // Apply search filter
     if (searchTerm) {
       filteredTodos = filteredTodos.filter((todo) =>
         todo.title.toLowerCase().includes(searchTerm.toLowerCase())
