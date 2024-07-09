@@ -75,6 +75,9 @@ button {
   color: white;
   font-size: 1rem;
   font-weight: 600;
+}
+
+button{
   cursor: pointer;
 }
 
